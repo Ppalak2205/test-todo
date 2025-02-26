@@ -1,0 +1,35 @@
+<!-- <mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <section>
+        <div class="example-button-row">
+            <a mat-stroked-button (click)="logout()" target="_blank">Logout</a>
+        </div>
+    </section>
+</mat-toolbar> -->
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="app-title">My App</span>
+
+    <section class="toolbar-section">
+        <div class="example-button-row">
+            <a mat-stroked-button (click)="logout()" target="_blank">Logout</a>
+        </div>
+
+        <!-- Profile Icon with Menu -->
+        <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="Profile">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+
+        <!-- Profile Menu -->
+        <mat-menu #profileMenu="matMenu">
+            <button mat-menu-item (click)="navigateToProfile()">Profile</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+    </section>
+</mat-toolbar>

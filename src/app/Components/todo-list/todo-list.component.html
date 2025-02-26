@@ -1,0 +1,77 @@
+<!-- <div class="todo-container">
+  <mat-card class="add-task-card">
+    <mat-card-content>
+      <div class="todo-input">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>New Task</mat-label>
+          <input matInput [(ngModel)]="newTask" placeholder="Enter a task">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addTask()">
+          Add Task
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="todo-list">
+    <mat-card *ngFor="let task of todos; let i = index" class="todo-card" (click)="openTaskDialog(task)">
+      <mat-card-header>
+        <mat-card-title>
+          <span [ngClass]="{'completed': task.isCompleted}">{{ task.title }}</span>
+        </mat-card-title>
+      </mat-card-header>
+
+      <div style="display: flex;">
+        <button mat-icon-button color="accent" (click)="toggleCompletion(task, $event)">
+          <mat-icon>{{ task.isCompleted ? 'undo' : 'check' }}</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteTask(i, $event)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div> -->
+<div class="todo-container">
+  <mat-card class="add-task-card">
+    <mat-card-content>
+      <div class="todo-input">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>New Task</mat-label>
+          <input matInput [(ngModel)]="newTask" placeholder="Enter a task">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addTask()">
+          Add Task
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="todo-list">
+    <mat-card *ngFor="let task of todos; let i = index" class="todo-card" (click)="openTaskDialog(task)">
+      <mat-card-header class="task-header">
+        <mat-card-title>
+          <span [ngClass]="{'completed': task.isCompleted}">{{ task.title }}</span>
+        </mat-card-title>
+        <mat-card-subtitle>Date
+          <!-- {{ task.dueDate | date:'MMM d, y' }} -->
+        </mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p class="task-description">
+          description
+          <!-- {{ task.description }} -->
+        </p>
+      </mat-card-content>
+      
+      <mat-card-actions class="task-actions">
+        <button mat-icon-button color="accent" (click)="toggleCompletion(task, $event)">
+          <mat-icon>{{ task.isCompleted ? 'undo' : 'check' }}</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteTask(i, $event)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
