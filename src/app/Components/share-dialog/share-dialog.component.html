@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Enter email to share</mat-label>
+        <input matInput [(ngModel)]="shareEmail" placeholder="Enter user's email">
+      </mat-form-field>
+      <div class="dialog-actions">
+        <button mat-raised-button color="primary" (click)="shareTask()">Share Task</button>
+        <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+      </div>
+    </mat-card-content>
+  </mat-card>  

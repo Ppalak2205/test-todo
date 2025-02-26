@@ -13,7 +13,6 @@ import {Router, RouterLink} from '@angular/router';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    RouterLink
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -29,5 +28,8 @@ export class NavbarComponent {
     this.router.navigate(['/profile']);
     console.log("Navigating to Profile...");
   }
-  
+  navigateTodashboard() {
+    this.router.navigate(['/dashboard']);
+    console.log("Navigating to Dashboard...");
+  }
 }

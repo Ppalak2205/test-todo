@@ -40,17 +40,16 @@ export class TodoService {
         }
       });
     }
-  
-    // Delete a Todo
-    deleteTodo(id: number): Observable<void> {
+
+    deleteTodo(id: number): Observable<any> { // Change from `void` to `any` to handle JSON response
       const url = `${this.baseUrl}Todo/${id}`;
-      console.log(id);
-      return this.http.delete<void>(url, {
+      return this.http.delete<any>(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
-    } 
+    }
+    
 
     // Toggle the completion status of a Todo
     toggleCompletion(id: number): Observable<{ message: string; isCompleted: boolean }> {
@@ -60,5 +59,21 @@ export class TodoService {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
-    }    
+    }
+
+    // shareTodo(todoId: number, email: string): Observable<any> {
+    //   return this.http.post(`${this.baseUrl}Todo/share`, { todoItemId: todoId, email: email });
+    // }
+    shareTodo(todoId: number, email: string): Observable<any> {
+      return this.http.post(
+        `${this.baseUrl}Todo/share`, 
+        { todoItemId: todoId, email: email },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        }
+      );
+    }
+    
 }

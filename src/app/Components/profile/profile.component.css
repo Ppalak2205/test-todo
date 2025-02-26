@@ -1,0 +1,76 @@
+/* General styles */
+.profile-card {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    background: #fff;
+  }
+  
+  mat-card-header {
+    text-align: center;
+  }
+  
+  mat-card-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Form fields */
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  /* Profile picture preview */
+  img {
+    display: block;
+    margin: 10px auto;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 3px solid #3f51b5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* File input */
+  input[type="file"] {
+    display: block;
+    margin: 10px auto;
+  }
+  
+  /* Buttons */
+  .button-group {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 5px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .profile-card {
+      max-width: 90%;
+      padding: 15px;
+    }
+  
+    img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    button {
+      font-size: 13px;
+    }
+  }
+  

@@ -1,36 +1,3 @@
-<!-- <div class="todo-container">
-  <mat-card class="add-task-card">
-    <mat-card-content>
-      <div class="todo-input">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>New Task</mat-label>
-          <input matInput [(ngModel)]="newTask" placeholder="Enter a task">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="addTask()">
-          Add Task
-        </button>
-      </div>
-    </mat-card-content>
-  </mat-card>
-  <div class="todo-list">
-    <mat-card *ngFor="let task of todos; let i = index" class="todo-card" (click)="openTaskDialog(task)">
-      <mat-card-header>
-        <mat-card-title>
-          <span [ngClass]="{'completed': task.isCompleted}">{{ task.title }}</span>
-        </mat-card-title>
-      </mat-card-header>
-
-      <div style="display: flex;">
-        <button mat-icon-button color="accent" (click)="toggleCompletion(task, $event)">
-          <mat-icon>{{ task.isCompleted ? 'undo' : 'check' }}</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="deleteTask(i, $event)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </mat-card>
-  </div>
-</div> -->
 <div class="todo-container">
   <mat-card class="add-task-card">
     <mat-card-content>
@@ -46,32 +13,65 @@
     </mat-card-content>
   </mat-card>
 
+  <div class="filter-buttons">
+    <button mat-button [ngClass]="{'active-tab': activeFilter === 'all'}" (click)="filterTasks('all')">All</button>
+    <button mat-button [ngClass]="{'active-tab': activeFilter === 'completed'}" (click)="filterTasks('completed')">Completed</button>
+    <button mat-button [ngClass]="{'active-tab': activeFilter === 'pending'}" (click)="filterTasks('pending')">Pending</button>
+  </div>
+
   <div class="todo-list">
-    <mat-card *ngFor="let task of todos; let i = index" class="todo-card" (click)="openTaskDialog(task)">
+    <mat-card *ngFor="let task of filteredTodos; let i = index" class="todo-card">
       <mat-card-header class="task-header">
         <mat-card-title>
           <span [ngClass]="{'completed': task.isCompleted}">{{ task.title }}</span>
         </mat-card-title>
-        <mat-card-subtitle>Date
-          <!-- {{ task.dueDate | date:'MMM d, y' }} -->
-        </mat-card-subtitle>
+        <mat-card-subtitle>date</mat-card-subtitle>
       </mat-card-header>
-      
+
       <mat-card-content>
         <p class="task-description">
           description
-          <!-- {{ task.description }} -->
         </p>
       </mat-card-content>
-      
+
       <mat-card-actions class="task-actions">
         <button mat-icon-button color="accent" (click)="toggleCompletion(task, $event)">
           <mat-icon>{{ task.isCompleted ? 'undo' : 'check' }}</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteTask(i, $event)">
+        <button mat-icon-button color="primary" (click)="openTaskViewDialog(task)">
+          <mat-icon>visibility</mat-icon>
+
+        </button>
+        <button mat-icon-button color="primary" (click)="openTaskDialog(task)" [disabled]="task.isShared">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openShareDialog(task, $event)"  [disabled]="task.isShared">
+          <mat-icon>share</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteTask(i, $event)" [disabled]="task.isShared">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
+
+<div *ngIf="selectedTodo" class="share-dialog">
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Enter email to share</mat-label>
+        <input matInput [(ngModel)]="shareEmail" placeholder="Enter user's email">
+      </mat-form-field>
+      <!-- <button mat-icon-button color="primary" (click)="openShareDialog(task, $event)"[disabled]="task.sharedWith?.includes(currentUserEmail)">
+        <mat-icon>share</mat-icon>
+      </button> -->
+      <button mat-icon-button color="primary" (click)="openShareDialog(task, $event)">
+        <mat-icon>share</mat-icon>
+      </button>      
+      <button mat-raised-button color="warn" (click)="selectedTodo = null">
+        Cancel
+      </button>
+    </mat-card-content>
+  </mat-card>
 </div>

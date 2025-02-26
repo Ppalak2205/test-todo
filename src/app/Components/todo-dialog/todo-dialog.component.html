@@ -1,28 +1,27 @@
-<!-- <h2 mat-dialog-title>Edit Task</h2>
-<mat-dialog-content>
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Task</mat-label>
-    <input matInput [(ngModel)]="task.title">
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="dialogRef.close()">Cancel</button>
-  <button mat-button color="primary" (click)="saveTask()">Save</button>
-  <button mat-button color="warn" (click)="deleteTask()">Delete</button>
-</mat-dialog-actions> -->
+<h2 mat-dialog-title>{{ readOnly ? 'Task Details' : 'Edit Task' }}</h2>
 
-
-<h2 mat-dialog-title>Edit Task</h2>
 <mat-dialog-content class="dialog-content">
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Task Title</mat-label>
-    <input matInput [(ngModel)]="task.title">
+    <input matInput [(ngModel)]="task.title" [disabled]="readOnly">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Task Description</mat-label>
+    <textarea matInput [disabled]="readOnly"></textarea>
   </mat-form-field>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">Cancel</button>
-  <button mat-button color="primary" (click)="saveEdit()">Save</button>
-  <button mat-button color="warn" (click)="deleteTask()">Delete</button>
+  <button mat-button (click)="closeDialog()">Close</button>
+
+  <!-- Show Save/Delete buttons only if NOT in readOnly mode -->
+   @if (!readOnly) {
+     <ng-container>
+       <button mat-button color="primary" (click)="saveEdit()">Save</button>
+       <button mat-button color="warn" (click)="deleteTask()">Delete</button>
+     </ng-container>
+   }
 </mat-dialog-actions>
 
 <!-- <h2 mat-dialog-title>Edit Task</h2>
@@ -31,7 +30,27 @@
     <mat-label>Task Title</mat-label>
     <input matInput [(ngModel)]="task.title">
   </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Task Description</mat-label>
+    <textarea></textarea>
+  </mat-form-field>
+  
+  <h3>Live Chat</h3>
+  <div class="chat-container">
+    @for (message of messages; track $index) {
+      <div class="chat-message">
+        <strong>{{ message.sender }}:</strong> {{ message.text }}
+      </div>
+    }
+  </div>
+
+  <mat-form-field class="full-width">
+    <mat-label>Type a message...</mat-label>
+    <input matInput [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+  </mat-form-field>
+  <button mat-button color="primary" (click)="sendMessage()">Send</button>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-button (click)="closeDialog()">Cancel</button>
   <button mat-button color="primary" (click)="saveEdit()">Save</button>

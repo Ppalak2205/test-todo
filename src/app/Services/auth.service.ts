@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../Environment/environment';
+import { WINDOW } from '../Components/tokens/window.token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private baseUrl = environment.apiUrl;
-  // private apiUrl = 'https://localhost:7178/api/auth';
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, @Inject(WINDOW) private window: Window | undefined) {}
 
   register(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}Auth/register`, user);
@@ -20,14 +21,14 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!this.window?.localStorage?.getItem('token');
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    this.window?.localStorage?.removeItem('token');
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return this.window?.localStorage?.getItem('token') || null;
   }
 }
